@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.scalar.admin.rpc";
+option java_outer_classname = "AdminProto";
+
+package rpc;
+
+service Admin {
+    rpc Pause (PauseRequest) returns (google.protobuf.Empty) {
+    }
+    rpc Unpause (google.protobuf.Empty) returns (google.protobuf.Empty) {
+    }
+    rpc CheckPaused (google.protobuf.Empty) returns (CheckPausedResponse) {
+    }
+}
+
+message PauseRequest {
+    bool wait_outstanding = 1;
+    optional int64 max_pause_wait_time = 2;
+}
+
+message CheckPausedResponse {
+    bool paused = 1;
+}
